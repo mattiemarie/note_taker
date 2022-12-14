@@ -45,11 +45,16 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ## Mockup
 
-The following link shows a demo of the Challenge 11 - Note Taker Application:
+The following image shows the Challenge 11 - Note Taker Application:
 
 
 
 
+
+
+
+
+The following is the url to the deployed Challenge 11 - Note Taker Application:
 
 ## Description
 
