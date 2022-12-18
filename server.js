@@ -8,6 +8,7 @@ const app = express();
 // Middleware for parsing JSON and urlencoded from data
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
+
 app.use(express.static('public'));
 
 // GET Route for Home Page
@@ -20,11 +21,16 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(_dirname, './public/notes.html'))
 );
 
+// Promis version of Fs.Readfile (mini project)
+
+
 // GET Route for saved Notes
-app.get()
+app.get('/api/notes', (req,res) => {
+    readFromFile('./db.json').then((data) => res.json(JSON.parse(data)))
+});
 
 // POST Route for saved Notes
-app.post()
+app.post('/notes' , (req, res) => {})
 
 // DELETING Routes for saved Notes
 app.delete()
