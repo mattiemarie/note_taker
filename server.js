@@ -8,8 +8,6 @@ const app = express();
 // Middleware for parsing JSON and urlencoded from data
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
-app.use('/api', api);
-
 app.use(express.static('public'));
 
 // GET Route for Home Page
@@ -21,6 +19,15 @@ app.get('/', (req,res) =>
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(_dirname, './public/notes.html'))
 );
+
+// GET Route for saved Notes
+app.get()
+
+// POST Route for saved Notes
+app.post()
+
+// DELETING Routes for saved Notes
+app.delete()
 
 app.listen(PORT, () => 
     console.log(`App listening at http://localhost:${PORT}`)
