@@ -21,16 +21,19 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(_dirname, './public/notes.html'))
 );
 
-// Promis version of Fs.Readfile (mini project)
+// Promise version of Fs.Readfile (mini project)
 
 
 // GET Route for saved Notes
 app.get('/api/notes', (req,res) => {
-    readFromFile('./db.json').then((data) => res.json(JSON.parse(data)))
+    readFromFile('./Develop/db/db.json', 'utf8').then((data) => res.json(JSON.parse(data)))
 });
 
 // POST Route for saved Notes
-app.post('/notes' , (req, res) => {})
+app.post('/api/notes' , (req, res) => {
+    const note = req.body;
+    readFromFile('./Develop/db/db.json', 'utf-8').then((data) => res.json(JSON.parse(data)))
+})
 
 // DELETING Routes for saved Notes
 app.delete()
