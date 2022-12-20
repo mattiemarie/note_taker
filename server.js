@@ -12,16 +12,6 @@ app.use(express.urlencoded({ extended:true}));
 
 app.use(express.static('./develop/public'));
 
-// // GET Route for Home Page
-// app.get('/', (req,res) =>
-//     res.sendFile(path.join(_dirname, './develop/public/index.html'))
-// );
-
-// // GET Route for Notes Page
-// app.get('/api/notes', (req, res) =>
-//     res.sendFile(path.join(_dirname, './develop/public/notes.html'))
-// );
-
 // Promise version of Fs.Readfile (mini project)
 
 
@@ -58,7 +48,17 @@ app.delete('/api/notes/:id', function(req,res) {
                 newNote.push(notes[i])
         }
     })
-})
+});
+
+// GET Route for Home Page
+app.get('/', (req,res) =>
+    res.sendFile(path.join(_dirname, './develop/public/index.html'))
+);
+
+// GET Route for Notes Page
+app.get('/notes', (req, res) =>
+    res.sendFile(path.join(_dirname, './develop/public/notes.html'))
+);
 
 app.listen(PORT, () => 
     console.log(`App listening at http://localhost:${PORT}`)
