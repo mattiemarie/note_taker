@@ -47,8 +47,18 @@ app.post('/api/notes' , function(req, res) {
     })
 });
 
-// DELETING Routes for saved Notes
-app.delete()
+// DELETE request | API Route
+app.delete('/api/notes/:id', function(req,res) {
+    const deletedNote = parseInt(req.params.id);
+    readFile('./develop/db/db.json', 'utf8').then(function(data) {
+        const notes = [].concat(JSON.parse(data));
+        const newNote = []
+        for(let i = 0; i < notes.length; i++) {
+            if(deletedNote !== notes[i].id)
+                newNote.push(notes[i])
+        }
+    })
+})
 
 app.listen(PORT, () => 
     console.log(`App listening at http://localhost:${PORT}`)
