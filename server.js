@@ -1,4 +1,5 @@
 const express = require('express');
+const { writeFile } = require('fs');
 const path = require('path');
 
 
@@ -9,31 +10,42 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 
-app.use(express.static('public'));
+app.use(express.static('./develop/public'));
 
-// GET Route for Home Page
-app.get('/', (req,res) =>
-    res.sendFile(path.join(_dirname, './public/index.html'))
-);
+// // GET Route for Home Page
+// app.get('/', (req,res) =>
+//     res.sendFile(path.join(_dirname, './develop/public/index.html'))
+// );
 
-// GET Route for Notes Page
-app.get('/notes', (req, res) =>
-    res.sendFile(path.join(_dirname, './public/notes.html'))
-);
+// // GET Route for Notes Page
+// app.get('/api/notes', (req, res) =>
+//     res.sendFile(path.join(_dirname, './develop/public/notes.html'))
+// );
 
 // Promise version of Fs.Readfile (mini project)
 
 
-// GET Route for saved Notes
-app.get('/api/notes', (req,res) => {
-    readFromFile('./Develop/db/db.json', 'utf8').then((data) => res.json(JSON.parse(data)))
+// GET request | API Route
+app.get('/api/notes', function(req,res) {
+    readFromFile('./develop/db/db.json', 'utf8').then(function(data) {
+        notes = [].concat(JSON.parse(data))
+        res.json(notes)
+    })
 });
 
-// POST Route for saved Notes
-app.post('/api/notes' , (req, res) => {
+// POST request | API Route
+app.post('/api/notes' , function(req, res) {
     const note = req.body;
-    readFromFile('./Develop/db/db.json', 'utf-8').then((data) => res.json(JSON.parse(data)))
-})
+    readFromFile('./develop/db/db.json', 'utf-8').then(function(data) {
+        const notes = [].concat(JSON.parse(data));
+        note.id = notes.length + 1
+        notes.push(note);
+        return notes
+    }).then(function(notes) {
+        writeFile('./develop/db/db.json', JSON.stringify(notes))
+        res.json(note);
+    })
+});
 
 // DELETING Routes for saved Notes
 app.delete()
