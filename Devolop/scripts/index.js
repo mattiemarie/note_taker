@@ -10,7 +10,7 @@ saveBtn.addEventListener('click', (e) => {
 });
 
 // Not Really sure what this is doing
-const creadCard = (note) => {
+const createCard = (note) => {
     const noteE1 = document.createElement('div');
     noteE1.classList.add('card', 'mb-3', 'm-3');
     noteE1.setAttribute('key', note.note_id)

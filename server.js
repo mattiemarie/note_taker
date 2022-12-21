@@ -16,7 +16,7 @@ app.use(express.static('./develop/public'));
 
 // Promise version of Fs.Readfile (mini project)
 const readFromFile = util.promisify(fs.readFromFile);
-const writeToFile = util.promisify(fs.readFromFile);
+const writeToFile = util.promisify(fs.writeToFile);
 
 // GET request | API Route
 app.get('/api/notes', function(req,res) {
