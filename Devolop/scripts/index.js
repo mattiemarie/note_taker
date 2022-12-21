@@ -42,4 +42,15 @@ const saveNote = (note) =>
             console.error('Error:', error);
         });
 
-const deleteNote = () => {};
+const deleteNote = () =>
+    fetch('/api/notes', {
+        method: 'DELETE',
+        headers: {
+            'Contenet-Type': 'application/json',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => {
+            console.error('Error:', error)
+        })
