@@ -25,6 +25,21 @@ const getNote = () =>
             console.error('Error:', error)
         })
 
-const saveNote = () =>
+const saveNote = (note) =>
+    fetch('/api/notes', {
+         method: 'POST',
+         headers: {
+            'Contenet-Type': 'application/json',
+        },
+        body: JSON.stringify(note)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            alert(data);
+            createContext(note);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
-const deleteNote = () =>
+const deleteNote = () => {};
