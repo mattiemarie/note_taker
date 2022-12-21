@@ -1,8 +1,10 @@
 const express = require('express');
-const { writeFile } = require('fs');
+const fs = require('fs');
 const path = require('path');
+const util = require('util');
+const { v4: uuidv4 } = require('uuid')
 
-
+//Setting up Server
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -13,7 +15,8 @@ app.use(express.urlencoded({ extended:true}));
 app.use(express.static('./develop/public'));
 
 // Promise version of Fs.Readfile (mini project)
-
+const readFromFile = util.promisify(fs.readFromFile);
+const writeToFile = util.promisify(fs.readFromFile);
 
 // GET request | API Route
 app.get('/api/notes', function(req,res) {
@@ -60,6 +63,12 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(_dirname, './develop/public/notes.html'))
 );
 
+// GET Route to direct users to a 404 page
+app.get('*', (req, res) =>
+    res.sendFile(path.join(_dirname, 'public/pages/404.html'))
+);
+
+// Port is Listening
 app.listen(PORT, () => 
     console.log(`App listening at http://localhost:${PORT}`)
 );
