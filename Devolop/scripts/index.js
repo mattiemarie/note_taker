@@ -9,14 +9,22 @@ saveBtn.addEventListener('click', (e) => {
     window.location.href = '/***';
 });
 
-// Not Really sure what this is doing
-const createCard = (note) => {
-    const noteE1 = document.createElement('div');
-    noteE1.classList.add('card', 'mb-3', 'm-3');
-    noteE1.setAttribute('key', note.note_id)
-}
 
-const noteHeaderE1 = document.createElement('div');
-noteHeaderE1.classList.add(
-    'card-header'
-)
+const newNote = {};
+
+const getNote = () =>
+    fetch('/api/notes', {
+        method: 'GET',
+        headers: {
+            'Contenet-Type': 'application/json',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => {
+            console.error('Error:', error)
+        })
+
+const saveNote = () =>
+
+const deleteNote = () =>
