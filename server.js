@@ -44,11 +44,11 @@ app.get('/api/notes',(req, res) => {
 //POST Route for a new Note
 app.post('/api/notes', (req, res) => {
 
-    const { newTitle, newText } = req.body;
+    const { title, text } = req.body;
 
     readFromFile('./db/db.json').then((data) => {
         let db = JSON.parse(data)
-        db.push({ id: uuid4v(), newTitle, newText});
+        db.push({ id: uuidv4(), title, text});
         writeToFile('./db/db.json', db);
         res.json(db);
         });
