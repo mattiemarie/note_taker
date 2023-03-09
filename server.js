@@ -45,7 +45,7 @@ app.get('/api/notes',(req, res) => {
 app.post('/api/notes', (req, res) => {
 
     const { title, text } = req.body;
-
+    
     readFromFile('./db/db.json').then((data) => {
         let db = JSON.parse(data)
         db.push({ id: uuidv4(), title, text});
