@@ -9,6 +9,15 @@ const { v4: uuidv4 } = require('uuid');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Promise version of fs.readFile
+const readFromFile = util.promisify(fs.readFile);
+
+// fs.writetofile
+const writeToFile = (destination, content) =>
+  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
+    err ? console.error(err) : console.info(`\nData written to ${destination}`)
+  );
+
 // Middleware for parsing JSON and urlencoded from data
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
@@ -26,7 +35,7 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, './public/notes.html'))
 );
 
-// GET `db.json` file/RETURN saved notes
+// GET saved notes
 app.get('/api/notes',(req, res) => {
     res.readFromFile(path.join(__dirname, '/db/db.json'));
 });
