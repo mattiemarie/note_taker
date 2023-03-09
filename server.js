@@ -57,8 +57,8 @@ app.post('/api/notes', (req, res) => {
     });
 
 
-// DELETE a note by id
-app.delete('/api/note/:id', (req, res) => {
+// // DELETE a note by id
+app.delete('/api/notes/:id', (req, res) => {
 
     const { noteid } = req.params;
 
@@ -75,7 +75,23 @@ app.delete('/api/note/:id', (req, res) => {
         res.json(db);
       });
   });
+
+// // DELETE Route for a specific tip
+// app.delete('/note/:id', (req, res) => {
+//     const noteId = req.params.note_id;
+//     readFromFile('./db/db.json')
+//       .then((data) => JSON.parse(data))
+//       .then((json) => {
+//         // Make a new array of all tips except the one with the ID provided in the URL
+//         const result = json.filter((note) => note.note_id !== noteId);
   
+//         // Save that array to the filesystem
+//         writeToFile('./db/db.json', result);
+  
+//         // Respond to the DELETE request
+//         res.json(`Item ${noteId} has been deleted 🗑️`);
+//       });
+//   });
 
 // Port is Listening
 app.listen(PORT, () => 
