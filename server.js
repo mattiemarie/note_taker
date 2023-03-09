@@ -3,20 +3,22 @@ const fs = require('fs');
 const util = require('util')
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const { readFromFile, writeToFile, readAndAppend } = require('./helpers/fsUtils');
+
 
 
 //Setting up Server
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Promise version of fs.readFile
-const readFromFile = util.promisify(fs.readFile);
+// // Promise version of fs.readFile
+// const readFromFile = util.promisify(fs.readFile);
 
-// fs.writetofile
-const writeToFile = (destination, content) =>
-  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
-    err ? console.error(err) : console.info(`\nData written to ${destination}`)
-  );
+// // fs.writetofile
+// const writeToFile = (destination, content) =>
+//   fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
+//     err ? console.error(err) : console.info(`\nData written to ${destination}`)
+//   );
 
 // Middleware for parsing JSON and urlencoded from data
 app.use(express.json());
@@ -37,7 +39,7 @@ app.get('/notes', (req, res) =>
 
 // GET saved notes
 app.get('/api/notes',(req, res) => {
-    res.readFromFile(path.join(__dirname, '/db/db.json'));
+    res.sendFile(path.join(__dirname, '/db/db.json'));
 });
 
 
