@@ -60,13 +60,13 @@ app.post('/api/notes', (req, res) => {
 // // DELETE a note by id
 app.delete('/api/notes/:id', (req, res) => {
 
-    const { noteid } = req.params;
+    const { id } = req.params;
 
     readFromFile('./db/db.json').then((data) => {
         let db = JSON.parse(data);
         
         // Make a new array of all tips except the one with the ID provided in the URL
-        db = db.filter(note => note.noteid !== noteid)
+        db = db.filter(note => note.id !== id)
   
         // Save that array to the filesystem
         writeToFile('./db/db.json', db);
