@@ -69,3 +69,4 @@ The following is the url to the deployed Challenge 11 - Note Taker Application:
 
 ## Description
 
+The goal of Challenge 11 was to create a note take application that allows the user to write notes. Each note will consist of a title and a description, the user will also have the ability to save the note to a list of other notes, and delete notes from the list of other notes.
