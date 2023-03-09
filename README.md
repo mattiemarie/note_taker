@@ -59,6 +59,7 @@ The following image shows the Challenge 11 - Note Taker Application:
 
 
 
+![image](https://user-images.githubusercontent.com/111001779/224157647-ed67e0f8-8bec-40fd-9132-559c1cffb616.png)
 
 
 
