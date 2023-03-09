@@ -2,8 +2,6 @@ const express = require('express');
 // const fs = require('fs');
 const path = require('path');
 
-const apiRoutes = require('./routes/notes');
-
 
 //Setting up Server
 const PORT = process.env.PORT || 3001;
@@ -14,11 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/api', apiRoutes);
 
 
 // GET Route for Home Page
-app.get('*', (req,res) =>
+app.get('/', (req,res) =>
     res.sendFile(path.join(__dirname, './public/index.html'))
 );
 
@@ -29,7 +26,7 @@ app.get('/notes', (req, res) =>
 
 // GET `db.json` file/RETURN saved notes
 app.get('/api/notes',(req, res) => {
-    res.sendFile(path.join(__dirname, '/db/db.json'));
+    res.readFromFile(path.join(__dirname, '/db/db.json'));
 });
 
 
