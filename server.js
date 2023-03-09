@@ -33,6 +33,38 @@ app.get('/api/notes',(req, res) => {
 });
 
 
+//POST Route for a new Note
+notes.post('/notes', (req, res) => {
+
+    const { newTitle, newText } = req.body;
+
+    readFromFile('./db/db.json')
+    .then((data) => {let db = JSON.parse(data)});
+    db.push({ id: uuid4v(), newTitle, newText});
+    return { newTitle, newText }
+    })
+    writeToFile('./db/db.json', db);
+    res.json(db);
+
+
+// DELETE a note by id
+notes.delete('/:note_id', (req, res) => {
+    const noteId = req.params.note_id;
+    readFromFile('./db/db.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        
+        // Make a new array of all tips except the one with the ID provided in the URL
+        const result = json.filter((note) => note.note_id !== noteId);
+  
+        // Save that array to the filesystem
+        writeToFile('./db/db.json', result);
+  
+        // Respond to the DELETE request
+        res.json(`Item ${noteId} has been deleted`);
+      });
+  });
+  
 
 // Port is Listening
 app.listen(PORT, () => 
